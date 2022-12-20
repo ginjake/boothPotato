@@ -26,6 +26,9 @@ class GiftController extends Controller
     public function edit($id)
     {
         $gift = Gift::find($id);
+        if (empty($gift)) {
+            abort(404);
+        }
         if ($gift->userId != Auth::user()->id) {
             abort(403);
         }
