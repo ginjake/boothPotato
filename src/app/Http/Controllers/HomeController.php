@@ -69,17 +69,15 @@ class HomeController extends Controller
 
                 if ($html = @file_get_contents($gift->url) ) {
                     $html = file_get_contents($gift->url, false, stream_context_create($opts));
-                    $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'ASCII, JIS, UTF-8, SJIS');
-                    //DOMDocumentとDOMXpathの作成
-                    $dom = new DOMDocument;
-                    @$dom->loadHTML($html);
-                    $xpath = new DOMXPath($dom);
-
 
                     $url = $gift->url;
-                    $title = $xpath->query('//meta[@property="og:title"]/@content')->item(0)->nodeValue;
-                    $description = $xpath->query('//meta[@property="og:description"]/@content')->item(0)->nodeValue;
-                    $image = $xpath->query('//meta[@property="og:image"]/@content')->item(0)->nodeValue;
+                    preg_match('/<meta property="og:title" content="(.*?)"/', $html, $result);
+                    $title = $result[1];
+                    preg_match('/<meta property="og:image" content="(.*?)"/', $html, $result);
+                    $image = $result[1];
+                    preg_match('/<meta property="og:description" content="(.*?)"/', $html, $result);
+                    $description = $result[1];
+
                     $gift->giftCache = GiftCache::create(
                         [
                             'url' => $url,
