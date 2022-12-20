@@ -39,6 +39,9 @@ class GiftController extends Controller
     {
         $param = $request->input();
         $gift = Gift::find($param["id"]);
+        if (empty($gift)) {
+            abort(404);
+        }
         if ($gift->userId != Auth::user()->id) {
             abort(403);
         }
