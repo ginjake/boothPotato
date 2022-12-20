@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  app:
+    build: ./docker-image/php
+    volumes:
+    - ./src/:/var/www/html/booth
+    depends_on:
+    - mysql
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - default
+
+  mysql:
+    build: ./docker-image/mysql
+    platform: linux/x86_64
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: potato
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql:cached
+      - ./docker-image/mysql/conf.d:/etc/mysql/conf.d
+      - ./log/mysql:/var/log/mysql
+      - ./docker-image/mysql/init:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    links:
+      - mysql
+    ports:
+      - 8080:80
+    volumes:
+      - /sessions
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    networks:
+      - default
+volumes:
+  mysql-data:
+    driver: local
+  redis-data:
+    driver: local
+
+networks:
+  default:
+
