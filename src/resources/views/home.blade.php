@@ -37,9 +37,11 @@
                                                 </div>
                                                 <div class="col-6">
                                                     @auth
-                                                    <div>
-                                                        <a href="{{ route('gift.edit', ['id' => $gift->id])}}" class="btn btn-primary">編集</a>
-                                                    </div>
+                                                        @if (Auth::user()->id == $gift->userId)
+                                                        <div>
+                                                            <a href="{{ route('gift.edit', ['id' => $gift->id])}}" class="btn btn-primary">編集</a>
+                                                        </div>
+                                                        @endif
                                                     @endauth
                                                 </div>
                                             </div>
