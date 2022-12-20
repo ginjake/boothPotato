@@ -69,7 +69,7 @@ class HomeController extends Controller
 
                 if ($html = @file_get_contents($gift->url) ) {
                     $html = file_get_contents($gift->url, false, stream_context_create($opts));
-                    $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'auto');
+                    $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'ASCII, JIS, UTF-8, SJIS');
                     //DOMDocumentとDOMXpathの作成
                     $dom = new DOMDocument;
                     @$dom->loadHTML($html);
