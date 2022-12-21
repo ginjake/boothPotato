@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Gift;
 use App\Http\Requests\GiftRequest;
 class GiftController extends Controller
@@ -23,13 +23,9 @@ class GiftController extends Controller
         return view('gift.create');
     }
 
-    public function edit($id)
+    public function edit(Gift $gift)
     {
-        $gift = Gift::find($id);
-        if (empty($gift)) {
-            abort(404);
-        }
-        if ($gift->userId != Auth::user()->id) {
+        if (! Gate::allows('update-gift', $gift)) {
             abort(403);
         }
         return view('gift.edit', ['gift' => $gift]);
@@ -42,9 +38,11 @@ class GiftController extends Controller
         if (empty($gift)) {
             abort(404);
         }
-        if ($gift->userId != Auth::user()->id) {
+
+        if (! Gate::allows('update-gift', $gift)) {
             abort(403);
         }
+
         $gift->url = $param["url"];
         $gift->memo = $param["memo"];
         $gift->priority = $param["priority"];
@@ -60,10 +58,9 @@ class GiftController extends Controller
         return redirect()->route('home');
     }
 
-    public function destroy($id)
+    public function destroy(Gift $gift)
     {
-        $gift = Gift::find($id);
-        if ($gift->userId != Auth::user()->id) {
+        if (! Gate::allows('update-gift', $gift)) {
             abort(403);
         }
         $gift->delete();

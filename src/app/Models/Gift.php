@@ -16,7 +16,7 @@ class Gift extends Model
         'completed',
     ];
     /**
-     * ユーザーに関連している電話の取得
+     * キャッシュ
      */
     public function giftCache()
     {

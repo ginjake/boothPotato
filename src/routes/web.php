@@ -25,14 +25,13 @@ Route::get('/', function () {
 Route::get('/login/twitter', [TwitterLoginController::class, 'redirectToProvider'])->name('twitter.login');
 Route::get('/login/twitter/callback',[TwitterLoginController::class, 'handleProviderCallback']);
 
-Route::group(['prefix'=>'gift'], function () {
-    Route::get('create', [GiftController::class, 'create'])->name('gift.create');
-    Route::post('store', [GiftController::class, 'store'])->name('gift.store');
-    Route::get('edit/{id}', [GiftController::class, 'edit'])->name('gift.edit');
-    Route::post('update', [GiftController::class, 'update'])->name('gift.update');
-    Route::get('destroy/{id}', [GiftController::class, 'destroy'])->name('gift.destroy');
-
-  });
+Route::controller(GiftController::class)->prefix('gift')->group( function () {
+    Route::get('create', 'create')->name('gift.create');
+    Route::post('store', 'store')->name('gift.store');
+    Route::get('edit/{gift}', 'edit')->name('gift.edit');
+    Route::post('update', 'update')->name('gift.update');
+    Route::get('destroy/{gift}', 'destroy')->name('gift.destroy');
+});
 
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
