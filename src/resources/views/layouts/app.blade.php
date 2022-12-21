@@ -40,7 +40,7 @@
                         @guest
                             @isset($user)
                             <li class="nav-item">
-                                <p class="nav-link" href="{{ route('login') }}"> {{ $user->name}}さんの欲しいモノ</p>
+                                <p class="nav-link"> {{ $user->name}}さんの欲しいモノ</p>
                             </li>
                             @endisset
                             @if (Route::has('login'))
@@ -55,11 +55,18 @@
                                 </li>
                             @endif
                         @else
+                            @isset($user)
+                                @if($user->id != Auth::user()->id)
+                                    <li class="nav-item mt-1">
+                                        <p class="nav-link"> {{ $user->name}}さんの欲しいモノ</p>
+                                    </li>
+                                @endif
+                            @endisset
                             <li class="nav-item m-2">
                                 <a href="{{ route('gift.create')}}" class="btn btn-primary"> {{ __('欲しいモノ登録') }} </a>
                             <li>
                             <li class="nav-item m-2">
-                                <a href="https://twitter.com/intent/tweet?text={{Auth::user()->name}}さんのBOOTH欲しいモノです {{ urlencode(url()->current())}}?id={{Auth::user()->id}}" class="btn btn-primary"> {{ __('ツイート') }} </a>
+                                <a href="https://twitter.com/intent/tweet?text={{Auth::user()->name}}さんのBOOTH欲しいモノです {{ urlencode(url()->current())}}?id={{Auth::user()->twitterId}}" class="btn btn-primary"> {{ __('ツイート') }} </a>
                             <li>
                             <li class="nav-item dropdown m-2">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

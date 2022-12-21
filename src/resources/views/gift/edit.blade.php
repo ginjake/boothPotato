@@ -13,7 +13,7 @@
                 <div class="card-body">
                     @include('gift.components.form')
                     {{ Form::submit('変更',['class' => 'btn btn-primary mt-2 form-control']) }}
-                    <a href="{{ route('gift.destroy', ['id' => $gift->id])}}" class="btn btn-danger mt-2 form-control"> 削除 </a>
+                    <a href="{{ route('gift.destroy', [$gift])}}" class="btn btn-danger mt-2 form-control"> 削除 </a>
                 </div>
             </div>
             {{ Form::close() }}

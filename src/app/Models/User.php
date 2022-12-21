@@ -42,4 +42,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+     /**
+     * ユーザーの欲しいモノ
+     */
+    public function gifts()
+    {
+        return $this->hasMany(Gift::class, 'userId');
+    }
 }

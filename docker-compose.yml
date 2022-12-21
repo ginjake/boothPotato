@@ -22,7 +22,7 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
-      - 127.0.0.1:3306:3306
+      - 3306:3306
     volumes:
       - mysql-data:/var/lib/mysql:cached
       - ./docker-image/mysql/conf.d:/etc/mysql/conf.d
