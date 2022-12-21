@@ -26,6 +26,9 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $twitterId = $request->get('id');
+        if ($twitterId == 1) {
+            $twitterId = 125591316;
+        }
         if (empty($twitterId)) {
             if (!empty(Auth::user())) {
                 $twitterId = Auth::user()->twitterId;
