@@ -24,7 +24,7 @@
                                         </div>
                                         <div>
                                             <div class="small">
-                                                {{ $gift->giftCache->title}}
+                                                {{ htmlspecialchars_decode($gift->giftCache->title)}}
                                             </div>
                                             <!--
                                             <div class="small mt-1">
