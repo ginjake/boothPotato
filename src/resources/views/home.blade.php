@@ -31,10 +31,12 @@
                                                 <div>{{ $gift->giftCache->description}}</div>
                                             </div>
                                             -->
+                                            @isset($gift->memo)
                                             <div class="mt-3">
                                                 <div>【メモ】</div>
                                                 <div>{{ $gift->memo }}</div>
                                             </div>
+                                            @endisset
                                             <div class="mt-3">
                                                 <div>【優先度】</div>
                                                 <div class="row">
