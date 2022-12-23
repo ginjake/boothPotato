@@ -71,9 +71,12 @@ class BoothContentCacheService
      * @return array
      */
     private function reloadCache(string $url) :array {
+        preg_match('/items\/(.*)/', 'https://ramuneru0801.booth.pm/items/2928883', $item);
+        $combinedUrl = "https://booth.pm/ja/items/".$item[1];
+
         GiftCache::where('url', $url)->delete();
 
-        if ($html = @file_get_contents($url.'.json')) {
+        if ($html = @file_get_contents($combinedUrl.'.json')) {
 
             $content = json_decode($html);
 
