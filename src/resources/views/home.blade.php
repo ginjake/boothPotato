@@ -16,7 +16,7 @@
                             @continue
                         @endempty
                         <div class="card w-25 mb-5">
-                            <a href="{{ $gift->url}}" class="text-decoration-none text-reset">
+                            <a href="{{ $gift->url}}" target="_blank" class="text-decoration-none text-reset">
                                 <div class="card-body">
                                     <div>
                                         <div>
