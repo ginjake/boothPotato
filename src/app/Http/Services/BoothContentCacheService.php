@@ -1,8 +1,7 @@
 <?php
 namespace App\Http\Services;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Models\User;
+
+use App\Models\Category;
 use App\Models\Gift;
 use App\Models\GiftCache;
 use Carbon\Carbon;
@@ -56,6 +55,9 @@ class BoothContentCacheService
             if ($giftCache->updated_at < $cacheBaseTime) {
                 return true;
             }
+            if (empty($giftCache->price)) {
+                return true;
+            }
         }
 
         return false;
@@ -70,21 +72,32 @@ class BoothContentCacheService
      */
     private function reloadCache(string $url) :array {
         GiftCache::where('url', $url)->delete();
-        if ($html = @file_get_contents($url) ) {
-            $html = file_get_contents($url, false, stream_context_create($this->option));
 
-            preg_match('/<meta property="og:title" content="(.*?)"/', $html, $result);
-            $title = $result[1];
-            preg_match('/<meta property="og:image" content="(.*?)"/', $html, $result);
-            $image = $result[1];
-            preg_match('/<meta property="og:description" content="(.*?)"/', $html, $result);
-            $description = $result[1];
+        if ($html = @file_get_contents($url.'.json')) {
+
+            $content = json_decode($html);
+
+
+            Category::firstOrCreate([
+                    'id' => $content->category->id
+                ],
+                [
+                    'id' => $content->category->id,
+                    'name' => $content->category->name,
+                    'url' => $content->category->url
+                ],
+            );
+            return [
+                'categoryId' => $content->category->id,
+                'url' => $url,
+                'boothUrl' => $content->url,
+                'title' => $content->name,
+                'price' => $content->variations[0]->price,
+                'image' => $content->images[0]->original,
+                'description' => $content->description,
+            ];
+        } else {
+            abort(500);
         }
-        return [
-            'url' => $url,
-            'title' => $title,
-            'description' => $description,
-            'image' => $image,
-        ];
     }
 }

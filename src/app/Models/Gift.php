@@ -15,6 +15,7 @@ class Gift extends Model
         'memo',
         'completed',
     ];
+
     /**
      * キャッシュ
      */
