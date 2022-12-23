@@ -15,7 +15,7 @@
                         @empty($gift->giftCache)
                             @continue
                         @endempty
-                        <div class="card w-25 mb-5">
+                        <div class="card col-md-3  col-sd-6 mb-2">
                             <a href="{{ $gift->url}}" target="_blank" class="text-decoration-none text-reset">
                                 <div class="card-body">
                                     <div>
@@ -32,12 +32,12 @@
                                             </div>
                                             -->
                                             @isset($gift->memo)
-                                            <div class="mt-3">
+                                            <div class="mt-1">
                                                 <div>【メモ】</div>
                                                 <div>{{ $gift->memo }}</div>
                                             </div>
                                             @endisset
-                                            <div class="mt-3">
+                                            <div class="mt-1">
                                                 <div>【優先度】</div>
                                                 <div class="row">
                                                     <div class="col-6">
