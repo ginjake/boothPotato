@@ -16,7 +16,7 @@
                             @continue
                         @endempty
                         <div class="card col-md-3  col-sd-6 mb-2">
-                            <a href="{{ $gift->url}}" target="_blank" class="text-decoration-none text-reset">
+                            <a href="{{ $gift->giftCache->boothUrl}}" target="_blank" class="text-decoration-none text-reset">
                                 <div class="card-body">
                                     <div>
                                         <div>
