@@ -20,17 +20,20 @@
                                 <div class="card-body">
                                     <div>
                                         <div>
-                                            <img src="{{ $gift->giftCache->image}}" width="100%">
+                                            <div class="position-relative">
+                                                <img class="card-image" src="{{ $gift->giftCache->image}}" width="100%">
+                                                <span class="text-white px-2 bg-warning position-absolute bottom-0 end-0">￥{{ $gift->giftCache->price }}</span>
+                                            </div>
+                                            <div class="card-img-overlay">
+                                                <div class="mt-1">
+                                                    <span class="text-white px-2 bg-info">{{ $gift->giftCache->category->name }}</span>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div>
                                             <div class="small">
                                                 {{ htmlspecialchars_decode($gift->giftCache->title)}}
                                             </div>
-                                            <!--
-                                            <div class="small mt-1">
-                                                <div>{{ $gift->giftCache->description}}</div>
-                                            </div>
-                                            -->
                                             @isset($gift->memo)
                                             <div class="mt-1">
                                                 <div>【メモ】</div>

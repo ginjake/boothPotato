@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\GiftCache;
 use Carbon\Carbon;
+use App\Http\Services\BoothContentCacheService;
 class HomeController extends Controller
 {
     /**
@@ -39,54 +40,11 @@ class HomeController extends Controller
 
         $user = User::where('twitterId', $twitterId)->first();
 
-        //TODO UA偽装してOGPだけとりたいが、なんかうまく行ってない
-        $ua = "User-Agent: Twitterbot/1.0";
-        $opts = array(
-          'http'=>array(
-            'method'=>"GET",
-            'header'=>"$ua"
-          )
-        );
-
-        $cacheBaseTime = new Carbon('-3 days');
 
         if (isset($user->gifts)) {
             foreach ($user->gifts as $gift) {
-                $cacheReload = false;
-                //キャッシュがない
-                if (empty($gift->giftCache)) {
-                    $cacheReload = true;
-                } else {
-                    //キャッシュが古い
-                    if ($gift->giftCache->updated_at < $cacheBaseTime) {
-                        $cacheReload = true;
-                    }
-                }
-
-                if ($cacheReload) {
-                    GiftCache::where('url', $gift->url)->delete();
-
-                    if ($html = @file_get_contents($gift->url) ) {
-                        $html = file_get_contents($gift->url, false, stream_context_create($opts));
-
-                        $url = $gift->url;
-                        preg_match('/<meta property="og:title" content="(.*?)"/', $html, $result);
-                        $title = $result[1];
-                        preg_match('/<meta property="og:image" content="(.*?)"/', $html, $result);
-                        $image = $result[1];
-                        preg_match('/<meta property="og:description" content="(.*?)"/', $html, $result);
-                        $description = $result[1];
-
-                        $gift->giftCache = GiftCache::create(
-                            [
-                                'url' => $url,
-                                'title' => $title,
-                                'description' => $description,
-                                'image' => $image,
-                            ]
-                        );
-                    }
-                }
+                $boothContentCacheService = new BoothContentCacheService();
+                $gift->giftCache = $boothContentCacheService->updateAndGetCache($gift);
             }
         }
         return view('home',['user' => $user]);
