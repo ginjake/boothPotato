@@ -25,8 +25,8 @@
                                                 <span class="text-white px-2 bg-warning position-absolute bottom-0 end-0">￥{{ $gift->giftCache->price }}</span>
                                             </div>
                                             <div class="card-img-overlay">
-                                                <div class="mt-1">
-                                                    <span class="text-white px-2 bg-info">{{ $gift->giftCache->category->name }}</span>
+                                                <div class="mt-1 position-absolute top-0">
+                                                    <span class="text-white  mt-2 px-2 bg-info">{{ $gift->giftCache->category->name }}</span>
                                                 </div>
                                             </div>
                                         </div>
