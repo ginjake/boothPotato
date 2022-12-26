@@ -40,7 +40,6 @@ class HomeController extends Controller
 
         $user = User::where('twitterId', $twitterId)->first();
 
-
         if (isset($user->gifts)) {
             foreach ($user->gifts as $gift) {
                 $boothContentCacheService = new BoothContentCacheService();

@@ -48,6 +48,6 @@ class User extends Authenticatable
      */
     public function gifts()
     {
-        return $this->hasMany(Gift::class, 'userId');
+        return $this->hasMany(Gift::class, 'userId')->orderBy('priority', 'asc');
     }
 }
