@@ -33,19 +33,18 @@
                                         <div>
                                             <div class="small">
                                                 {{ htmlspecialchars_decode($gift->giftCache->title)}}
+                                                <div class="badge bg-primary">
+                                                    <div>{{ GiftConstants::PRIORITY[$gift->priority] }}</div>
+                                                </div>
                                             </div>
+
                                             @isset($gift->memo)
-                                            <div class="mt-1">
-                                                <div>【メモ】</div>
-                                                <div>{{ $gift->memo }}</div>
+                                            <div class="mt-3">
+                                                <div class="badge bg-secondary">メモ</div>
+                                                <div class="text-muted">{{ $gift->memo }}</div>
                                             </div>
                                             @endisset
                                             <div class="mt-1">
-                                                <div>【優先度】</div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div>{{ GiftConstants::PRIORITY[$gift->priority] }}</div>
-                                                    </div>
                                                     <div class="col-6">
                                                         @can('update-gift', $gift)
                                                             <div>
@@ -53,7 +52,7 @@
                                                             </div>
                                                         @endcan
                                                     </div>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
