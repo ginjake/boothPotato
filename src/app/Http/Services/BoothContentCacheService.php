@@ -31,7 +31,9 @@ class BoothContentCacheService
     public function updateAndGetCache(Gift $gift) {
         if ($this->checkCache($gift->giftCache)) {
             $saveData = $this->reloadCache($gift->url);
-            $gift->giftCache = GiftCache::create($saveData);
+            if (isset($saveData)) {
+                $gift->giftCache = GiftCache::create($saveData);
+            }
         }
         return $gift->giftCache;
     }
@@ -70,7 +72,7 @@ class BoothContentCacheService
      *
      * @return array
      */
-    private function reloadCache(string $url) :array {
+    private function reloadCache(string $url) :?array {
         preg_match('/items\/(.*)/', $url, $item);
         $combinedUrl = "https://booth.pm/ja/items/".$item[1];
 
@@ -100,7 +102,7 @@ class BoothContentCacheService
                 'description' => $content->description,
             ];
         } else {
-            abort(500);
+            return null;
         }
     }
 }
