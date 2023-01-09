@@ -82,16 +82,23 @@ class BoothContentCacheService
 
             $content = json_decode($html);
 
+            try {
+                Category::firstOrCreate([
+                        'id' => $content->category->id
+                    ],
+                    [
+                        'id' => $content->category->id,
+                        'name' => $content->category->name,
+                        'url' => $content->category->url
+                    ],
+                );
+            } catch (\Exception $e) {
+                report($e);
+                print_r($content);
+                exit();
+                session()->flash('flash_message', '更新が失敗しました');
+            }
 
-            Category::firstOrCreate([
-                    'id' => $content->category->id
-                ],
-                [
-                    'id' => $content->category->id,
-                    'name' => $content->category->name,
-                    'url' => $content->category->url
-                ],
-            );
             return [
                 'categoryId' => $content->category->id,
                 'url' => $url,
