@@ -27,7 +27,7 @@ class GiftUpdateRequest extends BaseRequest
                         Rule::unique('gifts')->ignore($data['id'], 'id')->where(function ($query) {
                             return $query->where('userId', Auth::user()->id);
                         }),
-                        'regex:/^(http).*(booth).*(items\/)[0-9]+/',
+                        'regex:/^(http).*(booth).*(items\/)[0-9]+$/',
                     ],
         ];
         return $rules;
