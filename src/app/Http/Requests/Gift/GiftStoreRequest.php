@@ -26,7 +26,7 @@ class GiftStoreRequest extends BaseRequest
                         Rule::unique('gifts')->where(function ($query) {
                             return $query->where('userId', Auth::user()->id);
                         }),
-                        'regex:/(http).*(booth).*(items)/',
+                        'regex:/^(http).*(booth).*(items\/)[0-9]+$/',
                     ],
         ];
         return $rules;
