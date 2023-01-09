@@ -93,6 +93,8 @@ class BoothContentCacheService
                     ],
                 );
             } catch (\Exception $e) {
+                print_r($combinedUrl);
+                echo("Error");
                 report($e);
                 print_r($content);
                 exit();
