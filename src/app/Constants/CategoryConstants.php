@@ -1,8 +1,8 @@
 <?php
 namespace App\Constants;
+
 class CategoryConstants
 {
-
     public const CATEGORY = [
         0 => 'アバター',
         1 => '衣装',
