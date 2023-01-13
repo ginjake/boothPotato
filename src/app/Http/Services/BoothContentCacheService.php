@@ -5,9 +5,9 @@ use App\Models\Category;
 use App\Models\Gift;
 use App\Models\GiftCache;
 use Carbon\Carbon;
+
 class BoothContentCacheService
 {
-
     private $ua;
     private $option;
 
@@ -28,7 +28,8 @@ class BoothContentCacheService
         );
     }
 
-    public function updateAndGetCache(Gift $gift) {
+    public function updateAndGetCache(Gift $gift)
+    {
         if ($this->checkCache($gift->giftCache)) {
             $saveData = $this->reloadCache($gift->url);
             if (isset($saveData)) {
@@ -45,8 +46,8 @@ class BoothContentCacheService
      *
      * @return bool
      */
-    public function checkCache(?GiftCache $giftCache) :bool{
-
+    public function checkCache(?GiftCache $giftCache) :bool
+    {
         $cacheBaseTime = new Carbon('-3 days');
 
         //キャッシュがない
@@ -72,18 +73,19 @@ class BoothContentCacheService
      *
      * @return array
      */
-    private function reloadCache(string $url) :?array {
+    private function reloadCache(string $url) :?array
+    {
         preg_match('/items\/(.*)/', $url, $item);
         $combinedUrl = "https://booth.pm/ja/items/".$item[1];
 
         GiftCache::where('url', $url)->delete();
 
         if ($html = @file_get_contents($combinedUrl.'.json')) {
-
             $content = json_decode($html);
 
             try {
-                Category::firstOrCreate([
+                Category::firstOrCreate(
+                    [
                         'id' => $content->category->id
                     ],
                     [

@@ -5,7 +5,6 @@ use App\Http\Controllers\GiftController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,9 +22,9 @@ Route::get('/', function () {
 
 
 Route::get('/login/twitter', [TwitterLoginController::class, 'redirectToProvider'])->name('twitter.login');
-Route::get('/login/twitter/callback',[TwitterLoginController::class, 'handleProviderCallback']);
+Route::get('/login/twitter/callback', [TwitterLoginController::class, 'handleProviderCallback']);
 
-Route::controller(GiftController::class)->prefix('gift')->group( function () {
+Route::controller(GiftController::class)->prefix('gift')->group(function () {
     Route::get('create', 'create')->name('gift.create');
     Route::post('store', 'store')->name('gift.store');
     Route::get('edit/{gift}', 'edit')->name('gift.edit');

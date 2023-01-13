@@ -43,9 +43,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-     /**
-     * ユーザーの欲しいモノ
-     */
+    /**
+    * ユーザーの欲しいモノ
+    */
     public function gifts()
     {
         return $this->hasMany(Gift::class, 'userId')->orderBy('priority', 'asc');
