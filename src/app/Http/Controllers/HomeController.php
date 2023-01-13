@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\GiftCache;
 use Carbon\Carbon;
 use App\Http\Services\BoothContentCacheService;
+
 class HomeController extends Controller
 {
     /**
@@ -16,7 +18,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -46,6 +47,6 @@ class HomeController extends Controller
                 $gift->giftCache = $boothContentCacheService->updateAndGetCache($gift);
             }
         }
-        return view('home',['user' => $user]);
+        return view('home', ['user' => $user]);
     }
 }

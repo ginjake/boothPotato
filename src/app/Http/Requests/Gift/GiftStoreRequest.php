@@ -19,7 +19,6 @@ class GiftStoreRequest extends BaseRequest
      */
     public function rules()
     {
-
         $rules = [
             'url' => [
                         'string',

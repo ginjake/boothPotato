@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
@@ -8,14 +9,16 @@ use App\Models\User;
 
 class TwitterLoginController extends Controller
 {
-    public function redirectToProvider() {
+    public function redirectToProvider()
+    {
         return Socialite::driver('twitter')->redirect();
     }
 
-    public function handleProviderCallback() {
+    public function handleProviderCallback()
+    {
         try {
             $twitterUser = Socialite::with('twitter')->user();
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             return redirect('login/twitter');
         }
 
