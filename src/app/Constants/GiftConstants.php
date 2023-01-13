@@ -1,8 +1,8 @@
 <?php
 namespace App\Constants;
+
 class GiftConstants
 {
-
     public const PRIORITY = [
         0 => 'すごく欲しい',
         1 => '欲しい',

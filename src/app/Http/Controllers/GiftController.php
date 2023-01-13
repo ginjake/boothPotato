@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Gift;
 use App\Http\Requests\Gift\GiftUpdateRequest;
 use App\Http\Requests\Gift\GiftStoreRequest;
+
 class GiftController extends Controller
 {
     /**
