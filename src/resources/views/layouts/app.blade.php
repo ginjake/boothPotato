@@ -18,6 +18,7 @@
     <meta property="og:image" content="{{ asset(('images/ogp.png')) }}" />
     <meta property="og:site_name" content="potato" />
     <meta property="og:description" content="BOOTHの欲しいモノを簡単に共有できるサイトです" />
+    <meta name="twitter:card" content="summary_large_image">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
