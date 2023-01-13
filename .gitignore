@@ -1,3 +1,4 @@
 /log/mysql/mysqld.log
 .idea/docker.iml
 .idea/php.xml
+src/.php-cs-fixer.cache
