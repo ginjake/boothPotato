@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="d-flex flex-wrap mt-5">
+            <div class="d-flex flex-wrap mt-2">
                 @empty($user)
                     <div class="alert alert-danger col-md-12" role="alert">
                         ユーザーページのURLルールが変更されました。お手数ですが、リンクの張り直しをお願いします

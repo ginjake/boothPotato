@@ -1,5 +1,5 @@
 FROM php:8.1.8-apache
-
+EXPOSE 5173
 ENV DEBCONF_NOWARNINGS yes
 
 RUN apt-get update \
