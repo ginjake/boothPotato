@@ -11,9 +11,11 @@
 
                     <div class="row mb-0">
                         <div class="col-md-8 offset-md-4">
-                            <a href="{{ route('twitter.login')}}" class="btn btn-primary">
+			    
+<a href="{{ route('twitter.login')}}" class="btn btn-primary">
                                 {{ __('TwitterでLogin') }}
-                            </a>
+			    </a>
+
                         </div>
                     </div>
                 </div>
