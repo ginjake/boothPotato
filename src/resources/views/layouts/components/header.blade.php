@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand w-50" href="#"><img src="{{ asset(('images/logoHeader.png')) }}"  class="mw-100"></a>
+        <a class="navbar-brand w-40" href="#"><img src="{{ asset(('images/logoHeader.png')) }}"  class="mw-100 my-2"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -45,11 +45,8 @@
                     <li class="nav-item m-2">
                         <a href="https://twitter.com/intent/tweet?text={{urlencode(Auth::user()->name)}}さんのBOOTH欲しいモノです {{ urlencode(url()->full().' #booth欲しいモノリスト') }} " target="_blank" class="btn btn-primary"> {{ __('ツイート') }} </a>
                     <li>
-                    <li class="nav-item m-2">
-                        <a href="{{ route('home', ['id' => config('value.ginjakeTwitterId'), 'sort' => 1 ])}}" class="btn btn-primary"> {{ __('管理人に奢る') }} </a>
-                    <li>
                     <li class="nav-item dropdown m-2">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="dropdown-toggle btn btn-primary" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             並び替え
                         </a>
 
@@ -74,7 +71,9 @@
                             </a>
                         </div>
                     </li>
-
+                    <li class="nav-item m-2">
+                        <a href="{{ route('home', ['id' => config('value.ginjakeTwitterId'), 'sort' => 1 ])}}" class="btn btn-light"> {{ __('管理人に奢る') }} </a>
+                    <li>
 
                     <li class="nav-item dropdown m-2">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
