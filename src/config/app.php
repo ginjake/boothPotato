@@ -215,6 +215,7 @@ return [
 
         // 定数系
         'GiftConstants' =>  App\Constants\GiftConstants::class,
+        'SortConstants' =>  App\Constants\SortConstants::class,
     ])->toArray(),
 
 ];

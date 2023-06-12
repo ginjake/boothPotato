@@ -27,6 +27,12 @@ class BoothContentCacheService
             )
         );
     }
+    /**
+     * __construct
+     * @param Gift $gift
+     *
+     * @return void
+     */
 
     public function updateAndGetCache(Gift $gift)
     {
