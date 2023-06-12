@@ -12,7 +12,7 @@
                 @endempty
                 @if($user->twitterId == config('value.ginjakeTwitterId'))
                 <div class="alert alert-info col-md-12" role="alert">
-                    サーバー代の補充として、何か奢ってもらえると嬉しいです<br>
+                    サーバー代の補填として、何か奢ってもらえると泣いて喜びます<br>
                     管理人ginjakeのtwitterは<a href="https://twitter.com/sirojake" target="_blank">こちら</a>
                 </div>
                 @endif
