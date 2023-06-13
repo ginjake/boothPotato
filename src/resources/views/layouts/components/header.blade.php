@@ -69,7 +69,7 @@
                         <a href="{{ route('gift.create')}}" class="btn btn-primary"> {{ __('欲しいモノ登録') }} </a>
                     <li>
                     <li class="nav-item m-2">
-                        <a href="https://twitter.com/intent/tweet?text={{urlencode(Auth::user()->name)}}さんのBOOTH欲しいモノです {{ urlencode(url()->current().'id='.$user->twitterId.'&sort='.$sort.' #booth欲しいモノリスト') }} " target="_blank" class="btn btn-primary"> {{ __('ツイート') }} </a>
+                        <a href="https://twitter.com/intent/tweet?text={{urlencode(Auth::user()->name)}}さんのBOOTH欲しいモノです {{ urlencode(url()->current().'?id='.$user->twitterId.'&sort='.$sort.' #booth欲しいモノリスト') }} " target="_blank" class="btn btn-primary"> {{ __('ツイート') }} </a>
                     <li>
                     <li class="nav-item dropdown m-2">
                         <a id="navbarDropdown" class="dropdown-toggle btn btn-primary" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
