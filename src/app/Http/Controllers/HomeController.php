@@ -51,7 +51,7 @@ class HomeController extends Controller
 
         $gifts = Gift::with('giftCache')->where('userId', $user->id)->get();
 
-        $sortType = $request->get('sort');
+        $sortType = $request->get('sort') ?? 0;
         if (isset($sortType)) {
             switch ($sortType) {
                 case SortConstants::PRIORITY:
@@ -76,6 +76,11 @@ class HomeController extends Controller
             }
         }
 
-        return view('home', ['user' => $user,'gifts' => $gifts]);
+        return view('home',
+            [
+                'user' => $user,
+                'gifts' => $gifts,
+                'sort' => $sortType
+            ]);
     }
 }
