@@ -68,35 +68,41 @@
                     <li class="nav-item m-2">
                         <a href="{{ route('gift.create')}}" class="btn btn-primary"> {{ __('欲しいモノ登録') }} </a>
                     <li>
-                    <li class="nav-item m-2">
-                        <a href="https://twitter.com/intent/tweet?text={{urlencode(Auth::user()->name)}}さんのBOOTH欲しいモノです {{ urlencode(url()->current().'?id='.$user->twitterId.'&sort='.$sort.' #booth欲しいモノリスト') }} " target="_blank" class="btn btn-primary"> {{ __('ツイート') }} </a>
-                    <li>
-                    <li class="nav-item dropdown m-2">
-                        <a id="navbarDropdown" class="dropdown-toggle btn btn-primary" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            並び替え
-                        </a>
+                    @isset($user)
+                        <li class="nav-item m-2">
 
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('home', ['id' => $user->twitterId ?? Auth::user()->twitterId, 'sort' => SortConstants::PRIORITY]) }}">
-                                {{ __('欲しい順') }}
+                                @if ($user->id == Auth::user()->id)
+                                    <a href="https://twitter.com/intent/tweet?text={{urlencode(Auth::user()->name)}}さんのBOOTH欲しいモノです {{ $twitterURL }} " target="_blank" class="btn btn-primary"> {{ __('ツイート') }} </a>
+                                @endif
+
+                        <li>
+                        <li class="nav-item dropdown m-2">
+                            <a id="navbarDropdown" class="dropdown-toggle btn btn-primary" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                並び替え
                             </a>
-                            <a class="dropdown-item" href="{{ route('home', ['id' => $user->twitterId ?? Auth::user()->twitterId,'sort' => SortConstants::CREATED_AT_DESC]) }}">
-                                {{ __('登録 新しい順') }}
-                            </a>
-                            <a class="dropdown-item" href="{{ route('home', ['id' => $user->twitterId ?? Auth::user()->twitterId,'sort' => SortConstants::CREATED_AT]) }}">
-                                {{ __('登録 古い順') }}
-                            </a>
-                            <a class="dropdown-item" href="{{ route('home', ['id' => $user->twitterId ?? Auth::user()->twitterId,'sort' => SortConstants::PRICE_HIGH]) }}">
-                                {{ __('価格が高い') }}
-                            </a>
-                            <a class="dropdown-item" href="{{ route('home', ['id' => $user->twitterId ?? Auth::user()->twitterId,'sort' => SortConstants::PRICE_LOW]) }}">
-                                {{ __('価格が安い') }}
-                            </a>
-                            <a class="dropdown-item" href="{{ route('home', ['id' => $user->twitterId ?? Auth::user()->twitterId,'sort' => SortConstants::RANDOM]) }}">
-                                {{ __('ランダム') }}
-                            </a>
-                        </div>
-                    </li>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('home', ['id' => $user->twitterId ?? Auth::user()->twitterId, 'sort' => SortConstants::PRIORITY]) }}">
+                                    {{ __('欲しい順') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('home', ['id' => $user->twitterId ?? Auth::user()->twitterId,'sort' => SortConstants::CREATED_AT_DESC]) }}">
+                                    {{ __('登録 新しい順') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('home', ['id' => $user->twitterId ?? Auth::user()->twitterId,'sort' => SortConstants::CREATED_AT]) }}">
+                                    {{ __('登録 古い順') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('home', ['id' => $user->twitterId ?? Auth::user()->twitterId,'sort' => SortConstants::PRICE_HIGH]) }}">
+                                    {{ __('価格が高い') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('home', ['id' => $user->twitterId ?? Auth::user()->twitterId,'sort' => SortConstants::PRICE_LOW]) }}">
+                                    {{ __('価格が安い') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('home', ['id' => $user->twitterId ?? Auth::user()->twitterId,'sort' => SortConstants::RANDOM]) }}">
+                                    {{ __('ランダム') }}
+                                </a>
+                            </div>
+                        </li>
+                    @endisset
                     <li class="nav-item m-2">
                         <a href="{{ route('home', ['id' => config('value.ginjakeTwitterId'), 'sort' => 1 ])}}" class="btn btn-light"> {{ __('管理人に奢る') }} </a>
                     <li>
@@ -107,6 +113,9 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('home') }}">
+                            {{ __('ホーム') }}
+                            </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
