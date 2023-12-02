@@ -11,11 +11,36 @@
                     </div>
                 @endempty
                 @if($user->twitterId == config('value.ginjakeTwitterId'))
+                <!--
                 <div class="alert alert-info col-md-12" role="alert">
                     サーバー代の補填として、何か奢ってもらえると泣いて喜びます<br>
                     管理人ginjakeのtwitterは<a href="https://twitter.com/sirojake" target="_blank">こちら</a>
                 </div>
+                -->
                 @endif
+
+                @auth
+                <div class="card col-md-3  col-sd-6 mb-2">
+                    <a href="https://adventar.org/calendars/8649" target="_blank" class="text-decoration-none text-reset">
+                        <div class="card-body">
+                            <div>
+                                <div>
+                                    <div class="position-relative">
+                                        <img class="card-image" src="{{ asset(('images/poster/アドカレ.png'))}}" width="100%">
+                                        <span class="text-white px-2 bg-warning position-absolute bottom-0 end-0">アドカレ</span>
+                                    </div>
+                                    <div class="">
+                                        <div class="mt-1 position-absolute top-0">
+                                            <span class="text-white  mt-2 px-2 bg-info">広告</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endauth
+
                 @foreach($gifts as $gift)
                     @empty($gift->giftCache)
                         @continue
